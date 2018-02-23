@@ -1,0 +1,61 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f7f9fa;
+}
+
+.title {
+  background-color: #30333b;
+}
+
+h1 {
+  padding: 6px;
+  text-align: center;
+  color: white;
+}
+
+.box {
+  width: 500px;
+  height: 170px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  text-align: center;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+p {
+  color: #bbbdbe;
+  font-size: 20px;
+}
+
+.status-img {
+  margin-top: 10px;
+  max-height: 80px;
+}
+
+.statusdns {
+  margin-top: 30px;
+  font-size: 13px;
+}
+
+.button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  padding-bottom: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 3px solid #d65a4a;
+  color: #d65a4a;
+}

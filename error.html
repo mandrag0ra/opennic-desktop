@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>OpenNic DNS !</title>
+    <meta charset="UTF-8">
+    <script charset="utf-8">require('./index')</script>
+    <link href="./assets/css/error.css" rel="stylesheet" type="text/css"/>
+  </head>
+ <body>
+   <div class='container'>
+
+     <div class='title'>
+       <h1>OpenNic Project</h1>
+     </div>
+
+     <div class='status box'>
+
+       <div id='disable'>
+         <img class='status-img' src='./assets/images/error.png'></img>
+         <p id='statusmsg'>Your internet connection seems to be down !</p>
+         <p id='statusmsg'>You need to be connected to internet to use this app.</p>
+         <button id='close' class="button">Close App</button>
+       </div>
+
+     </div>
+
+  </div>
+<script>
+const { ipcRenderer } = require("electron");
+
+document.getElementById("close").addEventListener("click", function() {
+  ipcRenderer.sendSync("close-app", "");
+});
+</script>
+ </body>
+</html>

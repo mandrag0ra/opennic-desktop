@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src='settings.js'></script>
+    <link href="./assets/css/settings.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class='container'>
+
+      <div class='title'>
+        <h1>Settings</h1>
+      </div>
+
+      <div class='box'>
+        <h2>DNS servers preferences:</h2>
+            <div id="switch">
+              <input type="checkbox" name="anon" id="anon" class="ios-toggle checkbox"/>
+              <label for="anon" class="checkbox-label" data-off="Anonymous logs" data-on="Have anonymous logs"></label>
+
+              <!-- <input type="checkbox" name="whitelists" id="whitelists" class="ios-toggle checkbox" />
+              <label for="whitelists" class="checkbox-label" data-off="Whitelists" data-on="Use whitelists"></label> -->
+
+              <input type="checkbox" name="blacklists" id="blacklists" class="ios-toggle checkbox" />
+              <label for="blacklists" class="checkbox-label" data-off="Blacklists" data-on="Use blacklists"></label>
+            </div>
+
+            <button id='close-btn' class="button button-activate">Close</button>
+
+      </div>
+
+   </div>
+   <script>
+   require("./settings.js");
+</script>
+
+  </body>
+</html>
