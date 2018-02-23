@@ -1,7 +1,5 @@
 # opennic-desktop
 
-========
-
 OpenNic Desktop is an easy way to use [OpenNic DNS](https://www.opennic.org) servers.
 Base on electron framework, it should work on Linux, MacOS and Windows.
 
