@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "electron-mocha ./tests --no-colors --timeout 10000 --full-trace",
+    "test": "electron-mocha ./tests --timeout 10000 --full-trace",
     "pack": "./node_modules/.bin/electron-builder --dir",
     "dist":
       "rm -rf dist/* && ./node_modules/.bin/electron-builder build -mwl --x64"
