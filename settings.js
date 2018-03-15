@@ -16,6 +16,18 @@ const closeWindow = () => {
   window.close();
 };
 
+const renderError = () => {
+  document.getElementById("result").classList.toggle("hidden");
+  document.getElementById("checkbox").classList.toggle("hidden");
+  document.getElementById("saved-failed").classList.toggle("hidden");
+
+  /**
+    Change preferencesChanged value after error displayed
+    to be enable to close the window
+  */
+  preferencesChanged = false;
+};
+
 const closeBtnFunction = () => {
   // Request new DNS servers only if changed has been made
   // Prevent uneccessary requests to OpenNic API
@@ -26,8 +38,10 @@ const closeBtnFunction = () => {
         log.error(
           "Error while getting new OpenNic DNS servers. Please see log file for more informations"
         );
+        renderError();
+      } else {
+        closeWindow();
       }
-      closeWindow();
     });
   } else {
     closeWindow();
@@ -55,6 +69,14 @@ const renderSettings = () => {
   document.getElementById("blacklists").addEventListener("change", function() {
     toggleSettings(this.id, this.checked);
   });
+
+  // If no network, hide options
+  if (!store.get("network")) {
+    renderError();
+    document.getElementById("msg-failed").innerHTML =
+      "No internet connection !";
+    log.warn("Settings window with No internet connection !!!");
+  }
 };
 
 renderSettings();

@@ -15,15 +15,31 @@
       <div class='box'>
         <h2>DNS servers preferences:</h2>
             <div id="switch">
-              <input type="checkbox" name="anon" id="anon" class="ios-toggle checkbox"/>
-              <label for="anon" class="checkbox-label" data-off="Anonymous logs" data-on="Have anonymous logs"></label>
+              <div id='checkbox'>
+                <input type="checkbox" name="anon" id="anon" class="ios-toggle checkbox"/>
+                <label for="anon" class="checkbox-label" data-off="Anonymous logs" data-on="Have anonymous logs"></label>
 
-              <!-- <input type="checkbox" name="whitelists" id="whitelists" class="ios-toggle checkbox" />
-              <label for="whitelists" class="checkbox-label" data-off="Whitelists" data-on="Use whitelists"></label> -->
+                <!-- <input type="checkbox" name="whitelists" id="whitelists" class="ios-toggle checkbox" />
+                <label for="whitelists" class="checkbox-label" data-off="Whitelists" data-on="Use whitelists"></label> -->
 
-              <input type="checkbox" name="blacklists" id="blacklists" class="ios-toggle checkbox" />
-              <label for="blacklists" class="checkbox-label" data-off="Blacklists" data-on="Use blacklists"></label>
+                <input type="checkbox" name="blacklists" id="blacklists" class="ios-toggle checkbox" />
+                <label for="blacklists" class="checkbox-label" data-off="Blacklists" data-on="Use blacklists"></label>
+              </div>
             </div>
+
+            <div class='hidden' id='result'>
+              <div id='saved-success' class="hidden">
+                <img class='status-img' src='./assets/images/ok.png'></img>
+                <p id='msg-success'>Saved</p>
+              </div>
+
+              <div id='saved-failed' class="hidden">
+                <img class='status-img' src='./assets/images/error.png'></img>
+                <p id='msg-failed'>Unable to save settings !</p>
+                <p id='msg-failed'>Please check your internet connection and try again.</p>
+              <!-- </div> -->
+            </div>
+          </div>
 
             <button id='close-btn' class="button button-activate">Close</button>
 
