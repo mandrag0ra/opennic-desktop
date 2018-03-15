@@ -98,7 +98,7 @@ const checkDNSReachability = () => {
 };
 
 log.debug("Launch background process");
+// 12 hours
+setInterval(checkDNSReachability, 1000 * 60 * 720);
 // 5 min
-setInterval(checkDNSReachability, 300000);
-// 5 sec
-// setInterval(checkDNSReachability, 5000);
+// setInterval(checkDNSReachability, 300000);
