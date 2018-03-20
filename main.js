@@ -61,7 +61,6 @@ const createSettingsWindow = () => {
     show: true,
     width: 570,
     height: 350,
-    titleBarStyle: "hiddenInset",
     vibracy: "titlebar",
     darkTheme: true,
     autoHideMenuBar: false,
@@ -69,6 +68,9 @@ const createSettingsWindow = () => {
     fullscreenable: false,
   });
   settingsWindows.loadURL(`file://${path.join(__dirname, "settings.html")}`);
+  settingsWindows.once("ready-to-show", () => {
+    settingsWindows.show();
+  });
 };
 
 app.on("ready", () => {
@@ -82,6 +84,7 @@ app.on("ready", () => {
     .ping("opennic.org")
     .then(res => {
       if (res == "success") {
+        store.set("network", true);
         onlineStatus = "up";
         createMainWindow(onlineStatus);
         createBackgroundWindow();
@@ -90,6 +93,8 @@ app.on("ready", () => {
       }
     })
     .catch(err => {
+      createMainWindow(onlineStatus);
+      store.set("network", false);
       log.error(err);
     });
 
@@ -192,21 +197,22 @@ const getOpennicServers = () => {
           store.set("opennic_servers", serversSettings);
           resolve(true);
         } catch (err) {
-          log.error("Get OpenNic DNS servers response error: ", err);
+          log.error("Unable to save DNS settings from API request: ", err);
           reject(false);
         }
       });
       response.on("error", err => {
-        log.error("Get OpenNic DNS servers response error: ", err);
+        log.error("Data response error from OpenNic API: ", err);
         reject(false);
       });
       response.on("end", () => {
-        log.info("OpenNic DNS Servers saved !");
+        log.info("Request to OpenNic API end !");
       });
     });
 
     request.on("error", err => {
-      log.error("Get OpenNic DNS servers response request: ", err);
+      log.error("Request to OpenNic API error: ", err);
+      reject(false);
     });
     request.end();
   });
@@ -387,6 +393,7 @@ ipcMain.on("get-opennic-servers", (event, arg) => {
       }
     })
     .catch(error => {
+      event.sender.send("get-opennic-servers-reply", false);
       log.error("Error while getting new DNS servers");
     });
 });
