@@ -1,15 +1,13 @@
 {
   "name": "opennic-desktop",
   "version": "0.2.0",
-  "description":
-    "Quickly set your desktop to use DNS servers from OpenNic projet",
+  "description": "Quickly set your desktop to use DNS servers from OpenNic projet",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "electron-mocha ./tests --timeout 10000 --full-trace",
     "pack": "./node_modules/.bin/electron-builder --dir",
-    "dist":
-      "rm -rf dist/* && ./node_modules/.bin/electron-builder build -mwl --x64"
+    "dist": "rm -rf dist/* && ./node_modules/.bin/electron-builder build -mwl --x64"
   },
   "build": {
     "appId": "org.opennic.opennic-app",
@@ -33,13 +31,23 @@
     "linux": {
       "category": "Network",
       "synopsis": "DNS from OpenNic projet",
-      "target": ["deb", "rpm", "snap", "AppImage"]
+      "target": [
+        "deb",
+        "rpm",
+        "snap",
+        "AppImage"
+      ]
     },
     "win": {
       "target": "NSIS"
     }
   },
-  "keywords": ["dns", "opennic", "app", "desktop"],
+  "keywords": [
+    "dns",
+    "opennic",
+    "app",
+    "desktop"
+  ],
   "author": "wil <wil@lesspheres.fr>",
   "homepage": "https://github.com/mandrag0ra/opennic-desktop",
   "repository": {
@@ -52,7 +60,7 @@
     "chai-http": "^3.0.0",
     "electron": "^1.7.11",
     "electron-builder": "^20.0.8",
-    "electron-mocha": "^5.0.0"
+    "electron-mocha": "^6.0.1"
   },
   "dependencies": {
     "electron-log": "^2.2.11",
