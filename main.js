@@ -5,12 +5,13 @@ const {
   Tray,
   nativeImage,
   net,
-  Menu,
+  Menu
 } = require("electron");
 const path = require("path");
 const electron = require("electron");
 const Store = require("electron-store");
 const log = require("electron-log");
+const { autoUpdater } = require("electron-updater");
 log.transports.console.level = "debug";
 
 const store = new Store();
@@ -32,7 +33,7 @@ const createMainWindow = status => {
     autoHideMenuBar: true,
     resizable: false,
     fullscreenable: false,
-    movable: true,
+    movable: true
   });
 
   if (status == "up") {
@@ -48,7 +49,7 @@ const createMainWindow = status => {
 
 const createBackgroundWindow = () => {
   const backgroundWindow = new BrowserWindow({
-    show: false,
+    show: false
   });
 
   backgroundWindow.loadURL(`file://${path.join(__dirname, "background.html")}`);
@@ -65,7 +66,7 @@ const createSettingsWindow = () => {
     darkTheme: true,
     autoHideMenuBar: false,
     resizable: false,
-    fullscreenable: false,
+    fullscreenable: false
   });
   settingsWindows.loadURL(`file://${path.join(__dirname, "settings.html")}`);
   settingsWindows.once("ready-to-show", () => {
@@ -73,10 +74,17 @@ const createSettingsWindow = () => {
   });
 };
 
+// Auto update
+autoUpdater.on("update-downloaded", info => {
+  // win.webContents.send("updateReady");
+  autoUpdater.checkForUpdatesAndNotify();
+});
+
 app.on("ready", () => {
   // Default OpenNic API URL
   if (!store.has("apiUrl")) {
     store.set("apiUrl", "https://api.opennic.org/geoip/?json&res=2");
+    store.set("anon-setting", true);
   }
 
   // Internet active connection ?
@@ -88,6 +96,7 @@ app.on("ready", () => {
         onlineStatus = "up";
         createMainWindow(onlineStatus);
         createBackgroundWindow();
+        autoUpdater.checkForUpdates();
       } else {
         createMainWindow(onlineStatus);
       }
@@ -102,7 +111,7 @@ app.on("ready", () => {
   if (process.platform == "darwin") {
     trayImage = imageFolder + "/osx/iconTemplate.png";
   } else if (process.platform == "win32") {
-    trayImage = imageFolder + "/win/icon.ico";
+    trayImage = imageFolder + "/icon.ico";
   } else {
     trayImage = imageFolder + "/icon.png";
   }
@@ -141,30 +150,30 @@ const trayMenuTemplate = [
     label: "Show",
     click: function() {
       toggleWindow();
-    },
+    }
   },
   // TODO
   {
     label: "Settings",
     click: function() {
       createSettingsWindow();
-    },
+    }
   },
   {
     label: "Help",
     click: function() {
       console.log("Clicked on Help");
-    },
+    }
   },
   {
-    type: "separator",
+    type: "separator"
   },
   {
     label: "Quit OpenNic",
     click: function() {
       closeApp();
-    },
-  },
+    }
+  }
 ];
 let trayContextMenu = Menu.buildFromTemplate(trayMenuTemplate);
 // END Build tray menu
@@ -190,7 +199,7 @@ const getOpennicServers = () => {
             let setting = {
               ip: servers[s]["ip"],
               loc: servers[s]["loc"],
-              stat: servers[s]["stat"],
+              stat: servers[s]["stat"]
             };
             serversSettings.push(setting);
           }
