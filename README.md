@@ -24,7 +24,7 @@ yarn start
 Use [electron-builder](https://www.electron.build) to build for all operating system.
 You can also use [electron-builder cli](https://www.electron.build/cli) to build only for your platform.
 
-Note: if builded from MacOS, you need to install rpm to build RPM package and snapcraft for snap `brew install snapcraft`
+Note: if builded from MacOS, you will need to install rpm to build RPM package and snapcraft for snap `brew install rpm snapcraft`
 
 ```bash
 # To build for all platforms
