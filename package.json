@@ -1,6 +1,6 @@
 {
   "name": "opennic-desktop",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "Quickly set your desktop to use DNS servers from OpenNic projet",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "electron-mocha ./tests --timeout 10000 --full-trace",
     "pack": "./node_modules/.bin/electron-builder --dir",
     "dist": "./node_modules/.bin/electron-builder build -mwl --x64",
-    "release": "./node_modules/.bin/electron-builder build -p always"
+    "release": "./node_modules/.bin/electron-builder build -mwl --x64 -p always"
   },
   "build": {
     "publish": "github",
