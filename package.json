@@ -1,6 +1,6 @@
 {
   "name": "opennic-desktop",
-  "version": "0.2.5",
+  "version": "0.2.5-beta.1",
   "description": "Quickly set your desktop to use DNS servers from OpenNic projet",
   "main": "main.js",
   "scripts": {
