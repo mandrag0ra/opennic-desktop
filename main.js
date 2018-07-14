@@ -11,8 +11,8 @@ const path = require("path");
 const electron = require("electron");
 const Store = require("electron-store");
 const log = require("electron-log");
-const { autoUpdater } = require("electron-updater");
 log.transports.console.level = "debug";
+
 
 const store = new Store();
 const assetsDir = path.join(__dirname, "assets");
@@ -74,18 +74,24 @@ const createSettingsWindow = () => {
   });
 };
 
-// Auto update
-autoUpdater.on("update-downloaded", info => {
-  // win.webContents.send("updateReady");
-  autoUpdater.checkForUpdatesAndNotify();
-});
+// App version
+function setAppVersion() {
+  appVersion = app.getVersion();
+  storeVersion = store.get('version');
+  if (appVersion != storeVersion) {
+    store.set('version', appVersion)
+  }
+}
 
+// App Ready
 app.on("ready", () => {
   // Default OpenNic API URL
   if (!store.has("apiUrl")) {
     store.set("apiUrl", "https://api.opennic.org/geoip/?json&res=2");
     store.set("anon-setting", true);
   }
+  // Set App version
+  setAppVersion();
 
   // Internet active connection ?
   osCmd
@@ -96,7 +102,6 @@ app.on("ready", () => {
         onlineStatus = "up";
         createMainWindow(onlineStatus);
         createBackgroundWindow();
-        autoUpdater.checkForUpdates();
       } else {
         createMainWindow(onlineStatus);
       }
@@ -274,8 +279,6 @@ const matchDnsConfig = () => {
 
 const checkDnsConfig = () => {
   return new Promise((resolve, reject) => {
-    dns = store.get("opennic_servers");
-    opennic_array = [dns[0].ip, dns[1].ip];
 
     matchDnsConfig()
       .then(match => {
@@ -359,9 +362,13 @@ ipcMain.on("show-window", () => {
 });
 
 ipcMain.on("get-current-config", (event, arg) => {
-  checkDnsConfig().then(status => {
+  checkDnsConfig()
+    .then(status => {
     event.returnValue = status;
-  });
+  })
+  .catch( err => {
+    log.error('Error while get current config: ', err)
+  })
 });
 
 ipcMain.on("open-settings-windows", (event, arg) => {

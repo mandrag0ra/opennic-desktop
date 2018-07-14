@@ -1,7 +1,6 @@
 const Store = require("electron-store");
 const store = new Store();
 const { ipcRenderer, remote } = require("electron");
-const osCmd = require("./lib/" + process.platform);
 require("./assets/js/contextmenu");
 
 const getCurrentConfig = () => {
@@ -42,7 +41,8 @@ const render = () => {
     });
   } else {
     document.getElementById("loading").classList.add("hide");
-    getCurrentConfig();
+    
+    getCurrentConfig()
   }
 };
 
