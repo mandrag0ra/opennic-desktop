@@ -81,6 +81,12 @@ p {
   outline: none; */
 }
 
+#version {
+  margin: auto;
+  text-align: center;
+  font-size: 12px;
+}
+
 #switch {
   width: 60px;
   /* margin: 50px auto; */
