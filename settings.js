@@ -77,6 +77,13 @@ const renderSettings = () => {
       "No internet connection !";
     log.warn("Settings window with No internet connection !!!");
   }
+
+  // App Version
+  if (store.get("version")) {
+    document.getElementById("version").innerHTML = 'v' + store.get('version')
+  } else {
+    log.debug("App version not found !!")
+  }
 };
 
 renderSettings();
